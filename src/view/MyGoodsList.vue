@@ -13,6 +13,10 @@
         <td>{{ item.goods_name }}</td>
         <td>{{ item.goods_price }}</td>
         <td>
+          <button v-if="item.inputVisible===false" class="btn btn-primary" @click="updateInputVisible(item)">+tag
+          </button>
+          <input v-else type="text" class="form-control" v-model="item.inputValue"
+                 @keyup.enter="addTag(item)" v-focus @blur="setAllToTagEnable" @keyup.esc="setAllToTagEnable">
           <span class="badge bg-warning text-dark" v-for="(tagItem,index) in item.tags" :key="index">
             {{ tagItem }}
           </span>
@@ -40,6 +44,23 @@ export default {
     deleteItem(index) {
       console.log(index)
       this.list.splice(index, 1)
+    },
+    updateInputVisible(item) {
+      this.setAllToTagEnable()
+      item.inputVisible = true
+    },
+    addTag(item) {
+      if (item.inputValue.toString().trim().length === 0) {
+        alert("请输入内容")
+        return
+      }
+      item.tags.push(item.inputValue)
+      item.inputValue = ''
+    },
+    setAllToTagEnable() {
+      this.list.forEach(value => {
+        value.inputVisible = false
+      })
     }
   },
   created() {
@@ -49,6 +70,13 @@ export default {
     }).catch(reason => {
       console.log(reason)
     })
+  },
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus()
+      }
+    }
   }
 }
 </script>

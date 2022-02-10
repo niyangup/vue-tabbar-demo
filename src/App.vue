@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <my-header title="导航栏"/>
-    <component :is="name" class="main"></component>
+    <keep-alive>
+      <component :is="name" class="main"></component>
+    </keep-alive>
     <my-tab-bar :item-list="itemList" @onTap="updateContent"></my-tab-bar>
   </div>
 </template>
