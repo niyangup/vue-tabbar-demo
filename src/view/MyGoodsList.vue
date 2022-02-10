@@ -8,7 +8,7 @@
         <th>标签</th>
         <th>操作</th>
       </template>
-      <template #body="{row:item}">
+      <template #body="{row:item,index}">
         <td>{{ item.id }}</td>
         <td>{{ item.goods_name }}</td>
         <td>{{ item.goods_price }}</td>
@@ -18,7 +18,7 @@
           </span>
         </td>
         <td>
-          <button class="btn btn-danger">删除</button>
+          <button class="btn btn-danger" @click="deleteItem(index)">删除</button>
         </td>
       </template>
     </my-table>
@@ -34,6 +34,12 @@ export default {
   data() {
     return {
       list: [],
+    }
+  },
+  methods: {
+    deleteItem(index) {
+      console.log(index)
+      this.list.splice(index, 1)
     }
   },
   created() {

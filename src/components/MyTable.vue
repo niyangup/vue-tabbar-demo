@@ -13,7 +13,7 @@
     </thead>
     <!-- 表格主体区域 -->
     <tbody>
-    <tr v-for="(item) in dataList" :key="item.id">
+    <tr v-for="(item,index) in dataList" :key="item.id">
       <!--      <td>{{ item.id }}</td>-->
       <!--      <td>{{ item.goods_name }}</td>-->
       <!--      <td>{{ item.goods_price }}</td>-->
@@ -21,7 +21,7 @@
       <!--      <td>-->
       <!--        <button class="btn btn-danger">删除</button>-->
       <!--      </td>-->
-      <slot name="body" :row="item"></slot>
+      <slot name="body" :row="item" :index="index"></slot>
     </tr>
     </tbody>
   </table>
