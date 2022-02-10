@@ -1,18 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <my-header title="导航栏"/>
+    <component :is="name"></component>
+    <my-tab-bar :item-list="itemList" @onTap="updateContent"></my-tab-bar>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import MyHeader from "@/components/MyHeader";
+import MyTabBar from "@/components/MyTabBar";
+import MyGoodsList from "@/view/MyGoodsList";
+import MyUserInfo from "@/view/MyUserInfo";
+import MyGoodsSearch from "@/view/MyGoodsSearch";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    MyGoodsSearch,
+    MyUserInfo,
+    MyGoodsList,
+    MyTabBar,
+    MyHeader,
+  },
+  data() {
+    return {
+      name: "MyGoodsList",
+      itemList: [
+        {
+          icon: "icon-shangpinliebiao", title: "列表", name: "MyGoodsList",
+        },
+        {
+          icon: "icon-sousuo", title: "搜索", name: "MyGoodsSearch",
+        },
+        {
+          icon: "icon-user", title: "我的", name: "MyUserInfo",
+        },
+      ],
+    }
+  },
+  methods: {
+    updateContent(index) {
+      this.name = this.itemList[index].name
+    }
+  },
 }
 </script>
 
