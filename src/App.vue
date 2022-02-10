@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <my-header title="导航栏"/>
-    <component :is="name"></component>
+    <component :is="name" class="main"></component>
     <my-tab-bar :item-list="itemList" @onTap="updateContent"></my-tab-bar>
   </div>
 </template>
@@ -47,13 +47,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+  .main {
+    margin-top: 45px;
+    margin-bottom: 50px;
+  }
 }
 </style>
